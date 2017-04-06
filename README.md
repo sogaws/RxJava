@@ -61,6 +61,7 @@ Observable switcher=Observable.from(kk);
 之所以说它是非正式写法，是因为Action1是一个单纯的人畜无害的接口，和Observer没有啥关系，只不过它可以当做观察者来使，专门处理onNext 事件，这是一种为了简便偷懒的写法。当然还有Action0，Action2,Action3...,0,1,2,3分别表示call()这个方法能接受几个参数。
 
 4、正常的观察者、被观察者、订阅的使用关系
+
 //创建被观察者，是事件传递的起点
 Observable.just("On","Off","On","On")
         //这就是在传递过程中对事件进行过滤操作
