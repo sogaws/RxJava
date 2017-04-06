@@ -1,4 +1,4 @@
-# RxJava
+# RxJava-----（来源：https://zhuanlan.zhihu.com/p/23584382）
 1、观察者模式和异步。观察者（Observer），订阅（Subscriber），被观察者（Observable），但因为流式API调用风格，实际代码为被观察者监听观察者即Observable.Subscriber（Observer）。
 
 2、创建被观察者
