@@ -73,14 +73,10 @@ Observable.just("On","Off","On","On")
                     public Boolean call(String s) {
                         return s！=null;
                     }
-                })
-                
+                })  
         //实现订阅
-        
         .subscribe(
-        
                 //创建观察者，作为事件传递的终点处理事件 
-                
                   new Subscriber<String>() {
                         @Override
                         public void onCompleted() {
@@ -89,15 +85,11 @@ Observable.just("On","Off","On","On")
 
                         @Override
                         public void onError(Throwable e) {
-                        
                             //出现错误会调用这个方法
-                            
                         }
                         @Override
                         public void onNext(String s) {
-                        
                             //处理事件
-                            
                             Log.d("DDDDD","handle this---"+s)
                         }
         );
