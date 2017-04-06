@@ -63,17 +63,24 @@ Observable switcher=Observable.from(kk);
 4、正常的观察者、被观察者、订阅的使用关系
 
 //创建被观察者，是事件传递的起点
+
 Observable.just("On","Off","On","On")
+
         //这就是在传递过程中对事件进行过滤操作
+        
          .filter(new Func1<String, Boolean>() {
                     @Override
                     public Boolean call(String s) {
                         return s！=null;
                     }
                 })
+                
         //实现订阅
+        
         .subscribe(
-                //创建观察者，作为事件传递的终点处理事件    
+        
+                //创建观察者，作为事件传递的终点处理事件 
+                
                   new Subscriber<String>() {
                         @Override
                         public void onCompleted() {
@@ -82,14 +89,19 @@ Observable.just("On","Off","On","On")
 
                         @Override
                         public void onError(Throwable e) {
+                        
                             //出现错误会调用这个方法
+                            
                         }
                         @Override
                         public void onNext(String s) {
+                        
                             //处理事件
+                            
                             Log.d("DDDDD","handle this---"+s)
                         }
         );
+        
 总结一下：
 创建被观察者，产生事件
 设置事件传递过程中的过滤，合并，变换等加工操作。
