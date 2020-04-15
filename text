@@ -1,0 +1,59 @@
+来自：http://blog.csdn.net/u014099894/article/details/51621858
+
+RxJava 有四个基本概念：Observable(被观察者/可观察者)、Observer(观察者)、Subscribe(订阅，监听)、Event(事件)。
+通过Observable.subscribe(Observer)来将Observable注册到Observer上。
+RxJava的事件回调方法有三个：onNext(),onError(),onComplete()。其中onError()和onComplete()是互斥的，在一个队列中只能一个方法被回调。
+onCompleted(): 事件队列完结。RxJava 不仅把每个事件单独处理，还会把它们看做一个队列。RxJava 规定，当不会再有新的 onNext() 发出时，需要触发 onCompleted() 方法作为标志。
+onError(): 事件队列异常。在事件处理过程中出异常时，onError() 会被触发，同时队列自动终止，不允许再有事件发出。
+
+ReactiveX 提供了一系列操作符来对事件流进行过滤、筛选、变换、合并等操作组合事件流，使事件流的处理更为高效。
+
+操作符类别：
+创建操作 
+create、defer、empty、never、throw、from、Interval、just、range、repeat、start、timer
+变换操作 
+buffer、flatmap、groupBy、map、scan、window
+过滤操作 
+debounce、distinct、distinctUtilChanged、elementAt、filter、first、ignoreElements、last、sample、skip、skipLast、take、takeLast、throttleWithTimeout、throttleFirst
+组合操作 
+and、then、when、combineLatest、join、merge、startWith、switch、zip
+错误处理 
+onErrorReturn、onErrorRusumeNext、onExceptionResumeNext、retry、retryWhen
+辅助操作 
+delay、delaySubscription、doOnEach、doOnNext、doOnSubscribe、doOnSubscribe、doOnUnSubscribe、doOnError、doOnComplete、doOnComplete、finallyDo、doAfterTerminate、materialize、dematerialize、ObserveOn、SubscribeOn、timeInterval、timeout、timestamp、using
+条件和布尔操作 
+all、amb、contains、isEmpty、defaultIsEmpty、sequenceEqual、skipUntil、skipWhile、takeUntil、takeWhile
+算术和聚合操作 
+concat、count、reduce、collect
+连接操作 
+publish、connect、refCount、replay
+转换操作 
+to
+自定义操作符 
+lift、compose
+
+操作符决策树：
+直接创建一个Observable（创建操作）
+组合多个Observable（组合操作）
+对Observable发射的数据执行变换操作（变换操作）
+从Observable发射的数据中取特定的值（过滤操作）
+转发Observable的部分值（条件/布尔/过滤操作）
+对Observable发射的数据序列求值（算术/聚合操作）
+
+
+RxJava的线程调度
+- Schedulers.computation( ) 在计算线程执行 
+- Schedulers.from(executor) 指定线程池 
+- Schedulers.immediate( ) 当前线程执行 
+- Schedulers.io( ) IO线程 
+- Schedulers.newThread( ) 新开子线程 
+- Schedulers.trampoline( ) 在当前线程排队，当其它排队的任务完成后开始执行 
+- AndroidSchedulers.mainThread() 在Android的UI线程执行
+subscribeOn() 设置 被观察者 所在的线程，事件产生线程，当使用了多个subscribeOn()的时候，只有第一个 subscribeOn() 起作用。 
+observeOn() 设置 观察者、下一步操作 运行的线程，事件消费线程。
+
+
+Rx相关库
+RxLifecycle 很方便的对Subscriber解绑，否则容易内存泄露
+RxBinding 对Android View的封装，很方便使用操作符对UI事件进行处理
+RxBus 替代EventBus
